@@ -1,0 +1,53 @@
+- title: Education
+  type: time_table
+  contents:
+    - title: Master of Science in Bioinformatics
+      institution: Freie Universität Berlin
+      year: Oct 2024 - Present
+      description:
+        - title: Focus Areas
+          contents:
+            - Data Integration in Life Sciences, Statistical Modeling, Machine Learning, Clinical Genomics.
+
+    - title: Bachelor of Science in Bioinformatics
+      institution: COMSATS University Islamabad
+      year: Sept 2019 – Jan 2023
+      description:
+        - title: Thesis & Core Skills
+          contents:
+            - Development of automated RNA-Seq workflows, Nextflow, Docker, Python, Bash, Sequence Alignment.
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Bioinformatics Student Assistant (HiWi)
+      institution: Max Planck Institute for Infection Biology
+      year: September 2025 – Present
+      description:
+        - Developing data-cleaning workflows for high-throughput sequencing data (SIMPLSeq) using CD-HIT clustering and frequency thresholding.
+        - Implementing longitudinal models in R to calculate Clonal Turnover Rates (CTR) and track malaria parasite persistence across seasonal timepoints.
+        - Designing noise-reduction algorithms to strip sequencing errors from raw genomic data, improving signal reliability for statistical modeling.
+        - Managing large-scale genomic datasets and preparing data for integration into predictive transmission platforms.
+
+    - title: Research Assistant (Pipeline Developer)
+      institution: COMSATS University, Dept. of Biosciences
+      year: August 2022 – Jan 2023
+      description:
+        - Engineered a Nextflow-based pipeline to automate the detection of polyadenylated reads from raw transcriptomic data.
+        - Containerized bioinformatics tools using Docker to ensure cross-platform reproducibility and scalable deployment.
+        - Processed and visualized gigabytes of RNA-Seq data using Python (Pandas, Matplotlib) and Bash scripting.
+
+- title: Skills
+  type: list
+  contents:
+    - <b>Languages:</b> Python (Pandas, NumPy), R, Rust, Bash, SQL (Postgres)
+    - <b>Engineering & DevOps:</b> Docker, Nextflow, AWS (EC2, S3), Git, CI/CD, Linux
+    - <b>Bioinformatics:</b> Haplotype Clustering, Longitudinal Modeling, RNA-Seq Analysis, Noise Reduction Algorithms
+
+- title: Professional Interests
+  type: list
+  contents:
+    - <b>Clinical Data Integration:</b> Combining molecular and genomic data with clinical health records to improve patient-level insights.
+    - <b>High-Performance Computing:</b> Developing efficient systems to handle and process large-scale biological datasets.
+    - <b>Reproducible Infrastructure:</b> Building automated, containerized pipelines to ensure research and diagnostics can be scaled and shared easily.
+    - <b>Computational Phenotyping:</b> Translating high-dimensional raw data into robust clinical phenotypes that can drive automated decision-support and predictive diagnostics.
