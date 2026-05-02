@@ -1,16 +1,14 @@
-# My Portfolio Website
+# Adina Nadeem Portfolio
 
-My personal website and blog. Just a place to host my projects, write about Data Science/Data Engineering/Bioinformatics, and keep my CV updated. 
+Personal portfolio for bioinformatics, biomedical data workflows, and precision medicine research direction.
 
-Built using the [Astro](https://astro.build/) minimal template.
+Built with [Astro](https://astro.build/).
 
 ## Dev Commands
 
-To run this locally, use your terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Builds the production site to `./dist/`          |
-| `npm run preview`         | Previews your build locally                      |
+| Command | Action |
+| :-- | :-- |
+| `npm install` | Installs dependencies |
+| `npm run dev` | Starts local dev server at `localhost:4321` |
+| `npm run build` | Builds the production site to `./dist/` |
+| `npm run preview` | Previews the production build locally |

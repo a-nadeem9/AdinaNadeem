@@ -1,5 +1,4 @@
 ---
-// Layout.astro — Global shell with GoFolium dark theme + particle canvas
 import Header from '../components/Header.astro';
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
@@ -9,11 +8,13 @@ interface Props {
   description?: string;
   ogImage?: string;
 }
+
 const {
-  title = 'Prithvi Rajan — Data Scientist & Bioinformatician',
-  description = 'Personal portfolio of Prithvi Rajan — data analyst, Oracle DBA, M.Sc. Bioinformatics student at Freie Universität Berlin.',
-  ogImage = '/prof_pic.jpg',
+  title = 'Adina Nadeem - Bioinformatics MSc | Genomics Workflows',
+  description = 'Portfolio of Adina Nadeem, MSc Bioinformatics student in Berlin focused on reproducible genomics workflows, statistical analysis, and biomedical data.',
+  ogImage = '/adina-profile.jpg',
 } = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -23,28 +24,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <meta name="keywords" content="Prithvi Rajan, bioinformatics, data analyst, Oracle DBA, portfolio, Berlin" />
-  <meta name="author" content="Prithvi Rajan" />
-  <meta property="og:title"       content={title} />
+  <meta name="keywords" content="Adina Nadeem, bioinformatics, genomics, precision medicine, Max Planck Institute for Infection Biology, Freie Universitat Berlin" />
+  <meta name="author" content="Adina Nadeem" />
+  <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image"       content={ogImage} />
-  <meta property="og:url"         content={canonicalURL} />
-  <meta property="og:type"        content="website" />
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content={title} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image"       content={ogImage} />
+  <meta name="twitter:image" content={ogImage} />
   <link rel="canonical" href={canonicalURL} />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <title>{title}</title>
 
-  <!-- Theme: default is DARK (GoFolium style). Light adds .light class -->
   <script is:inline>
     (function() {
       var stored = localStorage.getItem('theme');
-      // Default: dark (no class). Light mode: add .light class
-      if (stored === 'light') {
-        document.documentElement.classList.add('light');
+      if (stored === 'dark') {
+        document.documentElement.classList.add('dark');
       }
     })();
   </script>
@@ -52,9 +51,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <ClientRouter />
 </head>
 <body>
-  <!-- Animated particle background (GoFolium signature) -->
-  <canvas id="particles-canvas" aria-hidden="true"></canvas>
-
+  <div class="scroll-progress" aria-hidden="true"></div>
   <Header />
 
   <main id="main-content">
@@ -62,36 +59,33 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </main>
 
   <footer class="site-footer">
-    <div class="footer-banner-wrapper">
-      <img src="/Screenshot%202026-04-22%20012226.png" alt="Footer Banner" class="footer-banner" />
-    </div>
     <div class="container footer-content">
       <p>
-        © {new Date().getFullYear()} Prithvi Rajan ·
-        <a href="https://github.com/prithvirajanR" target="_blank" rel="noopener" class="footer-link">GitHub</a> ·
-        <a href="https://www.linkedin.com/in/prithvi-rajan-925879256/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a> ·
-        <a href="mailto:prithvi.rajan300@gmail.com" class="footer-link">Email</a>
+        &copy; {new Date().getFullYear()} Adina Nadeem
+        <span aria-hidden="true">/</span>
+        <a href="https://github.com/a-nadeem9" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+        <span aria-hidden="true">/</span>
+        <a href="mailto:adinanadeem@gmail.com" class="footer-link">Email</a>
       </p>
+      <p class="footer-note">Bioinformatics, biomedical data systems, and precision medicine.</p>
     </div>
   </footer>
 
-  <!-- Preserve theme across View Transitions -->
   <script is:inline>
     document.addEventListener('astro:before-swap', function(e) {
-      var isLight = document.documentElement.classList.contains('light');
-      if (isLight) e.newDocument.documentElement.classList.add('light');
-      else e.newDocument.documentElement.classList.remove('light');
+      var isDark = document.documentElement.classList.contains('dark');
+      if (isDark) e.newDocument.documentElement.classList.add('dark');
+      else e.newDocument.documentElement.classList.remove('dark');
     });
   </script>
 
-  <!-- Scroll animations -->
   <script>
     function initAnimations() {
       const obs = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
           if (entry.isIntersecting) {
             const el = entry.target as HTMLElement;
-            el.style.animationDelay = `${i * 60}ms`;
+            el.style.animationDelay = `${i * 55}ms`;
             el.classList.add('animate-fade-up');
             el.classList.remove('will-animate');
             obs.unobserve(el);
@@ -104,104 +98,83 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     document.addEventListener('astro:page-load', initAnimations);
   </script>
 
-  <!-- GoFolium particle animation -->
   <script is:inline>
-    function initParticles() {
-      var canvas = document.getElementById('particles-canvas');
-      if (!canvas) return;
-      var ctx = canvas.getContext('2d');
-      var W, H, particles = [];
-      var GREEN = '34,197,94';
+    function initScrollProgress() {
+      var bar = document.querySelector('.scroll-progress');
+      if (!bar) return;
 
-      function resize() {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
+      function updateProgress() {
+        var doc = document.documentElement;
+        var scrollable = doc.scrollHeight - window.innerHeight;
+        var progress = scrollable > 0 ? (window.scrollY / scrollable) : 0;
+        bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, progress)) + ')';
       }
-      resize();
-      window.addEventListener('resize', resize);
 
-      function Particle() {
-        this.x = Math.random() * W;
-        this.y = Math.random() * H;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.r = Math.random() * 2 + 1;
-      }
-      Particle.prototype.update = function() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > W) this.vx *= -1;
-        if (this.y < 0 || this.y > H) this.vy *= -1;
-      };
-
-      for (var i = 0; i < 80; i++) particles.push(new Particle());
-
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        particles.forEach(function(p) {
-          p.update();
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(' + GREEN + ',0.6)';
-          ctx.fill();
-        });
-        // Connect nearby particles
-        for (var a = 0; a < particles.length; a++) {
-          for (var b = a + 1; b < particles.length; b++) {
-            var dx = particles[a].x - particles[b].x;
-            var dy = particles[a].y - particles[b].y;
-            var dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 130) {
-              ctx.beginPath();
-              ctx.moveTo(particles[a].x, particles[a].y);
-              ctx.lineTo(particles[b].x, particles[b].y);
-              ctx.strokeStyle = 'rgba(' + GREEN + ',' + (1 - dist / 130) * 0.18 + ')';
-              ctx.lineWidth = 0.8;
-              ctx.stroke();
-            }
-          }
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
+      updateProgress();
+      window.removeEventListener('scroll', updateProgress);
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.removeEventListener('resize', updateProgress);
+      window.addEventListener('resize', updateProgress);
+      document.addEventListener('astro:page-load', updateProgress, { once: true });
     }
-    initParticles();
-    document.addEventListener('astro:page-load', initParticles);
+
+    initScrollProgress();
+    document.addEventListener('astro:page-load', initScrollProgress);
   </script>
 </body>
 </html>
 
 <style>
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    width: 100%;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+  }
   #main-content {
     padding-top: 0;
-    padding-bottom: 4rem;
+    padding-bottom: 3rem;
     min-height: calc(100vh - var(--header-height));
   }
   .site-footer {
     border-top: 1px solid var(--color-border);
-    text-align: center;
-    font-size: 0.85rem;
     color: var(--color-muted);
-  }
-  .footer-banner-wrapper {
-    width: 100%;
-    border-bottom: 1px solid var(--color-border);
-  }
-  .footer-banner {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    opacity: 0.85;
-    transition: opacity 0.3s ease, filter 0.3s ease;
-  }
-  .footer-banner:hover {
-    opacity: 1;
+    background: var(--color-bg);
   }
   .footer-content {
-    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.35rem 2rem;
+    font-family: var(--font-heading);
+    font-size: 0.86rem;
   }
-  .footer-link { color: var(--color-muted); transition: color 0.15s; }
-  .footer-link:hover { color: var(--color-accent); }
+  .footer-content p {
+    color: var(--color-muted);
+    font-size: 0.86rem;
+    line-height: 1.4;
+  }
+  .footer-content span {
+    color: var(--color-border);
+    padding: 0 0.35rem;
+  }
+  .footer-link {
+    color: var(--color-accent);
+    transition: color 0.15s;
+  }
+  .footer-link:hover { color: var(--color-secondary); }
+  @media (max-width: 700px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-inline: 1.2rem;
+    }
+  }
 </style>

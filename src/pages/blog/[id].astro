@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter(post => !post.data.draft);
+
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+---
+
+<Layout title={`${post.data.title} - Blog | Adina Nadeem`} description={post.data.description}>
+  <article class="container blog-post">
+    <a href="/blog" class="back-link">Back to Blog</a>
+    <header class="post-header">
+      <p class="eyebrow">Blog</p>
+      <h1>{post.data.title}</h1>
+      <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+    </header>
+
+    <div class="post-body">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<style>
+.blog-post {
+  max-width: 900px;
+  padding-top: 3.6rem;
+}
+.back-link {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 1.5rem;
+}
+.post-header {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 2rem;
+  margin-bottom: 2.4rem;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+.post-header h1 {
+  max-width: 780px;
+  margin-bottom: 0.8rem;
+}
+.post-header time {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  color: var(--color-muted);
+}
+.post-body {
+  max-width: 760px;
+  padding-bottom: 4rem;
+}
+.post-body :global(p) {
+  margin-bottom: 1.15rem;
+}
+.post-body :global(h2) {
+  font-size: 1.45rem;
+  margin: 2.1rem 0 0.85rem;
+}
+.post-body :global(h3) {
+  margin: 1.65rem 0 0.65rem;
+}
+.post-body :global(ul),
+.post-body :global(ol) {
+  margin: 0 0 1.15rem 1.25rem;
+  color: var(--color-muted);
+}
+.post-body :global(li) {
+  margin-bottom: 0.35rem;
+}
+.post-body :global(a) {
+  color: var(--color-accent);
+  border-bottom: 1px solid currentColor;
+}
+.post-body :global(code) {
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.9em;
+  background: var(--color-surface2);
+  border: 1px solid var(--color-border);
+  padding: 0.08rem 0.28rem;
+  border-radius: 4px;
+}
+</style>
