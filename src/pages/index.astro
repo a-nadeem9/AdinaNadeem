@@ -173,10 +173,10 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
       </div>
     </section>
 
-    <section class="visitor-map-section" aria-label="Recent visitor map">
-      <div class="visitor-map-shell">
+    <section class="visitor-map-section" aria-label="Recent visitor map" data-visitor-map-src={visitorMapSrc}>
+      <div class="visitor-map-shell" id="visitor-map-shell">
         {visitorMapSrc ? (
-          <Fragment set:html={`<script type="text/javascript" id="mapmyvisitors" src="${visitorMapSrc}"></script>`} />
+          <div class="visitor-map-loading">Loading map...</div>
         ) : (
           <div class="visitor-map-placeholder">
             <span>ClustrMaps visitor map</span>
@@ -444,12 +444,11 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
 }
 
 .visitor-map-shell {
+  position: relative;
   width: 100%;
   min-height: 300px;
-  display: grid;
-  place-items: center;
   overflow: hidden;
-  background: #2f80b3;
+  background: #1f6fa8;
 }
 
 .visitor-map-shell :global(canvas),
@@ -457,6 +456,19 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
 .visitor-map-shell :global(img),
 .visitor-map-shell :global(a) {
   max-width: 100%;
+}
+
+.visitor-map-shell :global(#mapmyvisitors-widget) {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.visitor-map-loading {
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
 }
 
 .visitor-map-placeholder {
@@ -467,7 +479,7 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
   align-content: center;
   gap: 0.45rem;
   color: #ffffff;
-  background: #2f80b3;
+  background: #1f6fa8;
   text-align: center;
 }
 
@@ -516,6 +528,7 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
   }
 
   .visitor-map-shell,
+  .visitor-map-loading,
   .visitor-map-placeholder {
     min-height: 230px;
   }

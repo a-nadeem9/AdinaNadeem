@@ -127,6 +127,43 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     initScrollProgress();
     document.addEventListener('astro:page-load', initScrollProgress);
   </script>
+
+  <script is:inline>
+    function initVisitorMap() {
+      var section = document.querySelector('[data-visitor-map-src]');
+      if (!section) return;
+
+      var src = section.getAttribute('data-visitor-map-src');
+      var shell = document.getElementById('visitor-map-shell');
+      if (!src || !shell) return;
+
+      var existingWidget = shell.querySelector('#mapmyvisitors-widget');
+      if (shell.getAttribute('data-loaded-src') === src && existingWidget) return;
+
+      document.querySelectorAll('script#mapmyvisitors').forEach(function(script) {
+        if (script.parentElement !== shell) script.remove();
+      });
+      document.querySelectorAll('#mapmyvisitors-widget').forEach(function(widget) {
+        if (!shell.contains(widget)) widget.remove();
+      });
+      document.querySelectorAll('.jvectormap-tip').forEach(function(tip) {
+        tip.remove();
+      });
+
+      shell.setAttribute('data-loaded-src', src);
+      shell.innerHTML = '';
+
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.id = 'mapmyvisitors';
+      script.src = src;
+      shell.appendChild(script);
+    }
+
+    initVisitorMap();
+    document.addEventListener('astro:page-load', initVisitorMap);
+    document.addEventListener('astro:after-swap', initVisitorMap);
+  </script>
 </body>
 </html>
 
