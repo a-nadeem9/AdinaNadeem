@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Metagenome analysis workflow visual</title>
+  <desc id="desc">A stacked abundance chart and workflow summary for metagenome analysis.</desc>
+  <rect width="720" height="420" fill="#f7f7f7"/>
+  <g fill="#111111" font-family="JetBrains Mono, Consolas, monospace" font-size="22" font-weight="800">
+    <text x="70" y="78">Metagenome analysis</text>
+    <text x="70" y="112" font-size="15" font-weight="500">assembly / taxonomy / polishing / reporting</text>
+  </g>
+  <g transform="translate(78 175)">
+    <rect width="92" height="145" fill="#e11473"/>
+    <rect y="54" width="92" height="91" fill="#00a95b"/>
+    <rect y="108" width="92" height="37" fill="#111111"/>
+    <rect x="128" width="92" height="145" fill="#00a95b"/>
+    <rect x="128" y="68" width="92" height="77" fill="#e11473"/>
+    <rect x="128" y="116" width="92" height="29" fill="#111111"/>
+    <rect x="256" width="92" height="145" fill="#111111"/>
+    <rect x="256" y="46" width="92" height="99" fill="#e11473"/>
+    <rect x="256" y="102" width="92" height="43" fill="#00a95b"/>
+  </g>
+  <g stroke="#d8d8d8" stroke-width="2">
+    <path d="M70 320h420"/>
+    <path d="M70 175v145"/>
+  </g>
+  <g stroke="#111111" stroke-width="2" fill="#ffffff">
+    <rect x="515" y="176" width="120" height="42"/>
+    <rect x="515" y="246" width="120" height="42"/>
+    <path d="M575 222v20"/>
+  </g>
+  <g fill="#111111" font-family="JetBrains Mono, Consolas, monospace" font-size="13" font-weight="700">
+    <text x="541" y="202">KRAKEN2</text>
+    <text x="550" y="272">MULTIQC</text>
+  </g>
+</svg>

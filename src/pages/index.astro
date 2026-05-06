@@ -1,462 +1,537 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { getCollection } from 'astro:content';
-
-const skills = [
-  'Python', 'R', 'Bash', 'SQL', 'Snakemake', 'Nextflow',
-  'Docker', 'AWS', 'Git', 'RNA-seq', 'Genomics', 'Statistics',
-  'DESeq2', 'Seurat', 'Biopython', 'SAMtools', 'BWA', 'BLAST',
+const socialLinks = [
+  { label: 'GitHub', href: 'https://github.com/a-nadeem9', icon: 'github' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/adina-nadeem/', icon: 'linkedin' },
+  { label: 'Email', href: 'mailto:adinanadeem@gmail.com', icon: 'mail' },
+  { label: 'Resume', href: '/journey', icon: 'file' },
 ];
 
-const experience = [
+const broadInterests = [
+  'reproducible genomics workflows',
+  'RNA-seq and transcriptomics',
+  'infection biology data',
+  'biomedical statistics',
+];
+
+const affiliations = [
   {
-    period: 'Current',
-    role: 'Bioinformatics / Data Work',
-    org: 'Max Planck Institute for Infection Biology',
-    bullets: [
-      'Working in an infection biology research environment where computational analysis supports biological discovery.',
-      'Focused on reproducible data workflows, genomics, and turning complex biomedical data into interpretable results.',
-    ],
+    name: 'Freie Universitat Berlin',
+    href: 'https://www.fu-berlin.de/',
+    logo: '/affiliations/fu-berlin-clean.png',
   },
   {
-    period: 'Oct 2024 - Present',
-    role: 'M.Sc. Bioinformatics',
-    org: 'Freie Universitat Berlin',
-    bullets: [
-      'Specializing in data science, statistical analysis, genomics, and medical bioinformatics.',
-      'Building toward research at the intersection of clinical, genomic, and computational data systems.',
-    ],
+    name: 'Charite',
+    href: 'https://www.charite.de/',
+    logo: '/affiliations/charite-clean.png',
   },
   {
-    period: 'Aug 2022 - Feb 2023',
-    role: 'Research Assistant',
-    org: 'COMSATS University, Department of Biosciences',
-    bullets: [
-      'Built a Nextflow-based RNA-seq workflow to detect and filter polyadenylated reads from raw sequencing data.',
-      'Analyzed large RNA sequencing datasets with Python and packaged the workflow in Docker for reproducibility.',
-    ],
+    name: 'Max Planck Institute for Infection Biology',
+    href: 'https://www.mpiib-berlin.mpg.de/en',
+    logo: '/affiliations/mpiib-clean.png',
   },
 ];
 
-const focusAreas = [
+const timelineItems = [
   {
-    title: 'Genomics Workflows',
-    text: 'Building and adapting RNA-seq, genome assembly, metagenomics, and transcript quantification pipelines.',
+    date: 'October 2025',
+    text: 'Selected for the Charite X-Student Research Group on individual immune responses, using machine learning with immunological, clinical, and genetic data.',
   },
   {
-    title: 'Reproducible Analysis',
-    text: 'Using Snakemake, Nextflow, Docker, Git, and structured reports to make computational work easier to rerun and review.',
+    date: 'September 2025',
+    text: 'Joined the Max Planck Institute for Infection Biology as a Bioinformatics Student Assistant.',
   },
   {
-    title: 'Biomedical Data',
-    text: 'Working toward stronger analysis habits for biological, clinical, and multi-source datasets.',
+    date: 'October 2024',
+    text: 'Relocated to Berlin to begin my M.Sc. in Bioinformatics at Freie Universitat Berlin.',
   },
   {
-    title: 'Infection Biology',
-    text: 'Developing research experience in a Max Planck infection biology environment while strengthening genomics and programming skills.',
+    date: 'May 2024',
+    text: 'Submitted a Google Summer of Code proposal for a pathogen-focused multiple-mapping Nextflow pipeline after discussing the project with a Wellcome Sanger Institute mentor.',
+  },
+  {
+    date: 'April 2024',
+    text: 'Advanced to the interview stage of the Major League Hacking (MLH) Fellowship.',
   },
 ];
 
-const snapshots = [
-  { label: 'Current', value: 'Max Planck Institute for Infection Biology' },
-  { label: 'Program', value: 'MSc Bioinformatics, Freie Universitat Berlin' },
-  { label: 'Core tools', value: 'Python, R, Snakemake, Nextflow, Docker' },
-];
+const clustrMapsKey = import.meta.env.PUBLIC_CLUSTRMAPS_KEY || '';
+const visitorMapEmbedSrc = import.meta.env.PUBLIC_VISITOR_MAP_EMBED_SRC || '';
+const defaultVisitorMapSrc =
+  'https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=n&d=Q3AGJClcxij9mfuh22uuJoXMk3OBLKP2qPEqSTOobik&co=1f6fa8&cmo=ff0000&cmn=00cc00';
+const clustrMapsSrc = clustrMapsKey
+  ? `https://cdn.clustrmaps.com/map_v2.js?d=${encodeURIComponent(clustrMapsKey)}&cl=ffffff&w=a&t=n`
+  : '';
+const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSrc;
 
-const projects = await getCollection('projects');
-const featuredProjects = projects
-  .filter(project => project.data.featured)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 3);
 ---
 
 <Layout
-  title="Adina Nadeem - Bioinformatics MSc | Genomics Workflows"
-  description="Portfolio of Adina Nadeem, an MSc Bioinformatics student focused on reproducible genomics workflows, statistical analysis, and biomedical data."
+  title="Adina Nadeem - Bioinformatics MSc"
+  description="Portfolio of Adina Nadeem, an MSc Bioinformatics student in Berlin focused on reproducible genomics workflows and biomedical data."
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">MSc Bioinformatics - Berlin</p>
-        <h1>Adina Nadeem</h1>
-        <p class="hero-role">
-          Bioinformatics MSc student focused on reproducible genomics workflows, statistical analysis,
-          and biomedical data.
-        </p>
+  <div class="container profile-page">
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-grid">
+        <div class="intro-copy">
+          <h1 id="intro-title"><span>Adina</span> Nadeem</h1>
+          <p class="intro-subtitle">Bioinformatics MSc | Genomics Workflows | Biomedical Data Systems</p>
 
-        <div class="hero-actions">
-          <a href="#" aria-disabled="true" class="btn btn-solid">Download CV</a>
-          <a href="https://github.com/a-nadeem9" target="_blank" rel="noopener" class="btn">GitHub</a>
-          <a href="mailto:adinanadeem@gmail.com" class="btn">Email</a>
-        </div>
+          <aside class="intro-aside" aria-label="Profile details">
+            <img src="/adina-profile.jpg" alt="Adina Nadeem" class="intro-photo" loading="eager" />
+            <p class="profile-location">Berlin, Germany</p>
 
-        <div class="snapshot-grid">
-          {snapshots.map(item => (
-            <div class="snapshot-item">
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
+            <div class="social-row" aria-label="Profile links">
+              {socialLinks.map(link => (
+                <a href={link.href} class="social-link" target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener' : undefined}>
+                  <span class="social-icon" aria-hidden="true">
+                    {link.icon === 'github' && (
+                      <svg viewBox="0 0 24 24" role="img">
+                        <path d="M12 2C6.48 2 2 6.58 2 12.22c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.71 0 0 .84-.27 2.75 1.05A9.34 9.34 0 0 1 12 6.94c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.59.69.49A10.1 10.1 0 0 0 22 12.22C22 6.58 17.52 2 12 2Z" />
+                      </svg>
+                    )}
+                    {link.icon === 'linkedin' && (
+                      <svg viewBox="0 0 24 24" role="img">
+                        <path d="M5.2 8.8H2.4V21h2.8V8.8ZM3.8 3C2.8 3 2 3.78 2 4.75S2.78 6.5 3.76 6.5h.02c1.02 0 1.8-.78 1.8-1.75S4.8 3 3.8 3Zm7 5.8H8V21h2.8v-6.78c0-.36.03-.72.13-.98.3-.72.98-1.47 2.12-1.47 1.5 0 2.1 1.13 2.1 2.8V21H18v-6.75c0-3.62-1.93-5.3-4.5-5.3-2.1 0-3.02 1.16-3.53 1.97h.03V8.8Z" />
+                      </svg>
+                    )}
+                    {link.icon === 'mail' && (
+                      <svg viewBox="0 0 24 24" role="img">
+                        <path d="M3.5 5h17A1.5 1.5 0 0 1 22 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17.5v-11A1.5 1.5 0 0 1 3.5 5Zm.7 2 7.8 5.45L19.8 7H4.2Zm15.8 1.85-7.43 5.19a1 1 0 0 1-1.14 0L4 8.85V17h16V8.85Z" />
+                      </svg>
+                    )}
+                    {link.icon === 'file' && (
+                      <svg viewBox="0 0 24 24" role="img">
+                        <path d="M6 2.5h8.3L20 8.2v13.3H6V2.5Zm7.5 1.8V9h4.7l-4.7-4.7ZM8 4.5v15h10V11h-6.5V4.5H8Zm2 8.5h6v1.7h-6V13Zm0 3.3h6v1.7h-6v-1.7Z" />
+                      </svg>
+                    )}
+                  </span>
+                  {link.label}
+                </a>
+              ))}
             </div>
-          ))}
+          </aside>
+
+          <div class="interest-block" aria-label="Broad interests">
+            <p>My broad interests:</p>
+            <ul>
+              {broadInterests.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+
+          <div class="bio-copy">
+            <p>
+              I'm an <strong>MSc Bioinformatics student at Freie Universitat Berlin</strong>, currently building
+              research experience at the <strong>Max Planck Institute for Infection Biology</strong>. I like the
+              practical middle of bioinformatics: clean workflows, careful quality control, and results that other
+              people can actually rerun.
+            </p>
+
+            <p>
+              My work has included RNA-seq and genomics pipelines using <strong>Python</strong>, <strong>R</strong>,
+              <strong>Nextflow</strong>, <strong>Snakemake</strong>, <strong>Docker</strong>, and the usual command-line
+              biology toolkit. I am especially interested in how genomic, clinical, and environmental data can be
+              connected responsibly for precision medicine.
+            </p>
+
+            <p>
+              Right now I'm strengthening my research practice across infection biology, statistical analysis, and
+              workflow engineering while looking for projects where biology and computation meet in a useful way.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="portrait-panel">
-        <img src="/adina-profile.jpg" alt="Adina Nadeem" class="bio-photo" loading="eager" />
-      </div>
-    </div>
-  </section>
-
-  <section class="section about-section">
-    <div class="container about-grid">
-      <div>
-        <h2 class="section-title">About</h2>
-      </div>
-      <div class="bio-text">
-        <p>
-          I am an MSc Bioinformatics student at Freie Universitat Berlin, currently gaining research experience
-          at the Max Planck Institute for Infection Biology. My work is centered on scientific programming,
-          statistical analysis, and reproducible workflows for biological data.
-        </p>
-        <p>
-          I have built RNA-seq and genomics workflows using tools such as Nextflow, Snakemake, Python, Bash,
-          and Docker. I am most comfortable in the space between data cleaning, pipeline design, quality control,
-          and communicating results clearly.
-        </p>
-        <p>
-          Long term, I am interested in how genomic, clinical, and environmental data can be connected responsibly
-          for precision medicine. For now, I am focused on building the technical and research foundation to do that
-          work well.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section focus-section">
-    <div class="container project-preview">
-      <div class="section-hdr">
-        <h2 class="section-title">Selected Work</h2>
-        <a href="/projects" class="more-link">View all projects</a>
-      </div>
-      <div class="preview-grid">
-        {featuredProjects.map(project => (
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            tags={project.data.tags}
-            github={project.data.github}
-            demo={project.data.demo}
-            featured={false}
-          />
+      <div class="affiliation-strip" aria-label="Current institutions">
+        {affiliations.map(item => (
+          <a
+            href={item.href}
+            class="affiliation-card"
+            target="_blank"
+            rel="noopener"
+            aria-label={item.name}
+          >
+            <img
+              src={item.logo}
+              alt={item.name}
+              loading="lazy"
+            />
+          </a>
         ))}
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section focus-section">
-    <div class="container">
-      <h2 class="section-title">Research Interests</h2>
-      <div class="focus-grid">
-        {focusAreas.map((area) => (
-          <article class="focus-card will-animate">
-            <h3>{area.title}</h3>
-            <p>{area.text}</p>
+    <section class="timeline-section" aria-labelledby="timeline-title">
+      <h2 id="timeline-title">Timeline</h2>
+      <div class="timeline-list">
+        {timelineItems.map(item => (
+          <article class="timeline-item">
+            <time>{item.date}</time>
+            <p>{item.text}</p>
           </article>
         ))}
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">Skills &amp; Tools</h2>
-      <div class="skills-wrap">
-        {skills.map(s => <span class="tag">{s}</span>)}
+    <section class="visitor-map-section" aria-label="Recent visitor map">
+      <div class="visitor-map-shell">
+        {visitorMapSrc ? (
+          <Fragment set:html={`<script type="text/javascript" id="mapmyvisitors" src="${visitorMapSrc}"></script>`} />
+        ) : (
+          <div class="visitor-map-placeholder">
+            <span>ClustrMaps visitor map</span>
+            <small>Add the widget key to show live visits.</small>
+          </div>
+        )}
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-hdr">
-        <h2 class="section-title">Experience</h2>
-        <a href="/journey" class="more-link">View full journey</a>
-      </div>
-      <div class="exp-list">
-        {experience.map(e => (
-          <article class="exp-card will-animate">
-            <div class="exp-meta">
-              <span class="exp-period">{e.period}</span>
-            </div>
-            <div class="exp-body">
-              <h3 class="exp-role">{e.role}</h3>
-              <p class="exp-org">{e.org}</p>
-              <ul class="exp-bullets">
-                {e.bullets.map(b => <li>{b}</li>)}
-              </ul>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </Layout>
 
 <style>
-.hero {
-  padding: 3.6rem 0 3rem;
+.profile-page {
+  padding-top: 1.15rem;
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 330px);
-  gap: 4rem;
-  align-items: center;
+
+.intro {
+  padding: 1.55rem 2rem 0;
 }
-.hero-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+
+.intro-grid {
+  display: flow-root;
 }
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-secondary);
-  margin-bottom: 1rem;
+
+.intro-copy {
+  min-width: 0;
 }
-.hero h1 {
-  max-width: 780px;
+
+.intro h1 {
+  margin-top: 0;
+  margin-bottom: 0.45rem;
+  font-size: clamp(2.1rem, 4.2vw, 2.65rem);
 }
-.hero-role {
-  max-width: 640px;
-  margin-top: 0.85rem;
-  font-size: clamp(1.08rem, 1.7vw, 1.3rem);
-  color: var(--color-muted);
-  font-weight: 450;
-}
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin: 1.65rem 0 2rem;
-}
-.snapshot-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.25rem;
-  width: 100%;
-  max-width: 640px;
-  border-top: 1px solid var(--color-border);
-  padding-top: 0.9rem;
-}
-.snapshot-item {
-  display: grid;
-  grid-template-columns: 95px 1fr;
-  gap: 1rem;
-  padding: 0.18rem 0;
-  border-right: none;
-}
-.snapshot-item:last-child {
-  padding-right: 0;
-}
-.snapshot-item:nth-child(2) {
-  padding-left: 0;
-}
-.snapshot-item span {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: 0.4rem;
-}
-.snapshot-item strong {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 0.98rem;
-  font-weight: 400;
-  line-height: 1.35;
+
+.intro h1 span {
   color: var(--color-text);
 }
-.portrait-panel {
-  position: relative;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background: var(--color-surface);
-  box-shadow: none;
-  overflow: hidden;
+
+.intro-subtitle {
+  margin-bottom: 1.35rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
 }
-.bio-photo {
-  width: 100%;
-  aspect-ratio: 4 / 5.15;
+
+.interest-block {
+  margin-bottom: 1.3rem;
+}
+
+.interest-block p {
+  margin-bottom: 0.55rem;
+}
+
+.interest-block ul {
+  margin-left: 1.35rem;
+  color: var(--color-text);
+}
+
+.interest-block li {
+  padding-left: 0.15rem;
+}
+
+.intro-aside {
+  float: right;
+  width: min(38%, 390px);
+  min-width: 330px;
+  margin: 0 0 1.45rem 2.75rem;
+  padding-top: 0;
+  text-align: center;
+}
+
+.intro-photo {
   display: block;
+  width: 100%;
+  max-width: 330px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  margin-inline: auto;
+  border-radius: 3px;
   object-fit: cover;
-  object-position: center 42%;
-  filter: contrast(1.05);
+  object-position: center 36%;
+  border: 1px solid var(--color-border);
+  box-shadow: none;
 }
-.about-grid {
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 2.5rem;
-  border-top: 1px solid var(--color-border);
-  padding-top: 3.25rem;
-}
-.bio-text {
-  display: grid;
-  gap: 1.1rem;
-  max-width: 820px;
-}
-.bio-text p {
-  font-size: 1.02rem;
+
+.profile-location {
+  margin-top: 1rem;
+  font-weight: 700;
   color: var(--color-text);
 }
-.project-preview,
-.focus-section .container {
-  border-top: 1px solid var(--color-border);
-  padding-top: 3.25rem;
-}
-.preview-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.focus-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-}
-.focus-card {
-  min-height: 180px;
-  padding: 1.1rem 1.05rem;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background: var(--color-surface);
-  box-shadow: none;
+
+.social-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+  white-space: nowrap;
 }
-.focus-card h3 {
-  font-size: 1rem;
-  line-height: 1.3;
-}
-.focus-card p {
-  color: var(--color-muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
-.section-hdr {
-  display: flex;
+
+.social-link {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.8rem;
-}
-.section-hdr .section-title {
-  margin-bottom: 0;
-}
-.more-link {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 700;
+  gap: 0.28rem;
   color: var(--color-accent);
-  transition: color 0.15s;
-}
-.more-link:hover { color: var(--color-secondary); }
-.skills-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-}
-.exp-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.exp-card {
-  display: grid;
-  grid-template-columns: 170px 1fr;
-  gap: 1.5rem;
-  padding: 1.35rem 1.5rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  box-shadow: none;
-}
-.exp-period {
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  color: var(--color-accent);
+}
+
+.social-link + .social-link::before {
+  content: '|';
+  color: var(--color-border);
+  margin-right: 0.1rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+.social-icon svg {
+  width: 100%;
+  height: 100%;
   display: block;
-  padding-top: 0.25rem;
-  text-transform: uppercase;
+  fill: currentColor;
 }
-.exp-role {
-  font-size: 1.05rem;
-  margin-bottom: 0.2rem;
+
+.social-link:hover,
+.social-link:hover .social-icon {
+  color: var(--color-accent2);
 }
-.exp-org {
-  font-family: var(--font-sans);
-  font-size: 0.92rem;
-  font-weight: 650;
-  color: var(--color-muted);
-  margin-bottom: 0.7rem;
+
+.bio-copy {
+  display: block;
 }
-.exp-bullets {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+
+.bio-copy p {
+  margin: 0;
 }
-.exp-bullets li {
-  color: var(--color-muted);
-  font-size: 0.94rem;
-  line-height: 1.6;
-  padding-left: 1rem;
+
+.bio-copy p + p {
+  margin-top: 1.35rem;
+}
+
+.bio-copy strong {
+  font-weight: 800;
+}
+
+.affiliation-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+  margin-top: 2.25rem;
+  padding: 1rem 0 2.1rem;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.affiliation-card {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 116px;
+  padding: 0.75rem;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.dark .affiliation-card {
+  background: #ffffff;
+  border-color: #d8d8d8;
+}
+
+.affiliation-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.affiliation-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 88px;
+  object-fit: contain;
+}
+
+.timeline-section {
+  margin: 3.3rem 2rem 0;
+  padding-top: 1.45rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.timeline-section h2 {
+  margin-bottom: 1.55rem;
+  font-size: clamp(1.55rem, 2.8vw, 2.15rem);
+  font-weight: 500;
+}
+
+.timeline-list {
   position: relative;
+  display: grid;
+  gap: 1.35rem;
+  padding-left: 1.65rem;
 }
-.exp-bullets li::before {
+
+.timeline-list::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0.72em;
-  width: 5px;
-  height: 5px;
+  top: 0.65rem;
+  bottom: 0.65rem;
+  left: 0.44rem;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 1.3rem;
+  align-items: baseline;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0.37rem;
+  left: -1.65rem;
+  width: 0.9rem;
+  height: 0.9rem;
   border-radius: 50%;
   background: var(--color-accent);
+  box-shadow: 0 0 0 5px var(--color-secondary-soft);
 }
-@media (max-width: 900px) {
-  .hero-grid,
-  .about-grid,
-  .exp-card {
+
+.timeline-item time {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.timeline-item p {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.98rem;
+  line-height: 1.58;
+}
+
+.timeline-item strong,
+.timeline-item a {
+  color: var(--color-accent);
+}
+
+.visitor-map-section {
+  margin: 3rem 2rem 0;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.visitor-map-shell {
+  width: 100%;
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #2f80b3;
+}
+
+.visitor-map-shell :global(canvas),
+.visitor-map-shell :global(iframe),
+.visitor-map-shell :global(img),
+.visitor-map-shell :global(a) {
+  max-width: 100%;
+}
+
+.visitor-map-placeholder {
+  width: 100%;
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0.45rem;
+  color: #ffffff;
+  background: #2f80b3;
+  text-align: center;
+}
+
+.visitor-map-placeholder span {
+  font-weight: 800;
+}
+
+.visitor-map-placeholder small {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.visitor-map-placeholder code {
+  color: #ffffff;
+}
+
+@media (max-width: 760px) {
+  .intro-aside {
+    float: none;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 1.8rem;
+    padding-top: 0;
+    text-align: left;
+  }
+
+  .intro-photo {
+    margin-inline: 0;
+  }
+
+  .social-row {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 700px) {
+  .affiliation-strip {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
   }
-  .preview-grid,
-  .focus-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  .visitor-map-shell,
+  .visitor-map-placeholder {
+    min-height: 230px;
   }
 }
+
 @media (max-width: 560px) {
-  .hero {
-    padding-top: 3.4rem;
+  .intro {
+    padding-inline: 0;
   }
-  .preview-grid,
-  .focus-grid {
-    grid-template-columns: 1fr;
+
+  .timeline-section {
+    margin-inline: 0;
   }
-  .snapshot-item {
-    grid-template-columns: 1fr;
-    gap: 0.1rem;
-    padding: 0.35rem 0;
-  }
-  .section-hdr {
-    align-items: flex-start;
-    flex-direction: column;
+
+  .visitor-map-section {
+    margin-inline: 0;
   }
 }
 </style>

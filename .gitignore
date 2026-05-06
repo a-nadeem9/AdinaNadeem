@@ -11,6 +11,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+tmp/
 
 
 # environment variables
@@ -26,3 +27,5 @@ pnpm-debug.log*
 # local personal source files
 /*.pdf
 /*.png
+/an_logo_pack_v2.zip
+/an_logo_pack_v2/
