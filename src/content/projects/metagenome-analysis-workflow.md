@@ -1,10 +1,10 @@
 ---
-title: "Metagenome Assembly & Analysis Workflow"
-description: "Designed a Snakemake workflow for metagenomic analysis with QC, MEGAHIT assembly, Racon polishing, Kraken2 taxonomic classification, MultiQC reporting, and reference selection using Mash and RagTag."
-tags: ["Snakemake", "Metagenomics", "MEGAHIT", "Kraken2", "Mash", "MultiQC"]
-image: "/project-visuals/metagenome-analysis.svg"
-imageAlt: "Metagenome analysis visual with stacked abundance bars and reporting workflow nodes"
-github: "https://github.com/a-nadeem9"
+title: "Viral Genome Analysis Pipeline"
+description: "Built a Snakemake pipeline for Human Adenovirus genome assembly, comparative genomics, and phylogenetic analysis, from raw paired-end reads through QC, assembly, scaffolding, consensus calling, variability plots, and tree generation."
+tags: ["Snakemake", "Adenovirus", "SPAdes", "RagTag", "MAFFT", "IQ-TREE"]
+image: "/project-visuals/viral-sequence-variability.png"
+imageAlt: "Sequence variability plot from the adenovirus genome analysis README"
+github: "https://github.com/a-nadeem9/viral-genome-analysis-pipeline"
 featured: false
-order: 3
+order: 4
 ---
