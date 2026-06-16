@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:iris-blog": "node scripts/check-iris-blog.mjs",
+    "check:titles": "node scripts/check-page-titles.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
