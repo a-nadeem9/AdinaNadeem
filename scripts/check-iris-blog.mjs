@@ -37,4 +37,9 @@ for (const asset of requiredAssets) {
   await access(join(process.cwd(), asset));
 }
 
+const blogTemplate = await readFile(join(process.cwd(), 'src/pages/blog/[id].astro'), 'utf8');
+if (!blogTemplate.includes('height: 860px')) {
+  throw new Error('Interactive blog iframe is not using the expected desktop height.');
+}
+
 console.log('IRIS M2K1 blog post and assets are present in the built site.');
