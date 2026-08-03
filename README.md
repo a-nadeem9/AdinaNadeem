@@ -1,6 +1,6 @@
 # Adina Nadeem Portfolio
 
-Personal portfolio for bioinformatics, biomedical data workflows, and precision medicine research direction.
+Personal portfolio for biological representation learning, computational biology, and reproducible machine learning research.
 
 Built with [Astro](https://astro.build/).
 

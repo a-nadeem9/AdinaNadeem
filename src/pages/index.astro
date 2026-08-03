@@ -2,26 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/a-nadeem9', icon: 'github' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/adina-nadeem/', icon: 'linkedin' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/adinanadeem/', icon: 'linkedin' },
   { label: 'Email', href: 'mailto:adinanadeem@gmail.com', icon: 'mail' },
   { label: 'Resume', href: '/journey', icon: 'file' },
 ];
 
-const broadInterests = [
-  'reproducible genomics workflows',
-  'RNA-seq and transcriptomics',
-  'infection biology data',
-  'biomedical statistics',
-];
-
 const affiliations = [
   {
-    name: 'Freie Universitat Berlin',
+    name: 'Freie Universität Berlin',
     href: 'https://www.fu-berlin.de/',
     logo: '/affiliations/fu-berlin-clean.png',
   },
   {
-    name: 'Charite',
+    name: 'Charité',
     href: 'https://www.charite.de/',
     logo: '/affiliations/charite-clean.png',
   },
@@ -35,7 +28,7 @@ const affiliations = [
 const timelineItems = [
   {
     date: 'October 2025',
-    text: 'Selected for the Charite X-Student Research Group on individual immune responses, using machine learning with immunological, clinical, and genetic data.',
+    text: 'Selected for the Charité X-Student Research Group on individual immune responses, using machine learning with immunological, clinical, and genetic data.',
   },
   {
     date: 'September 2025',
@@ -43,7 +36,7 @@ const timelineItems = [
   },
   {
     date: 'October 2024',
-    text: 'Relocated to Berlin to begin my M.Sc. in Bioinformatics at Freie Universitat Berlin.',
+    text: 'Relocated to Berlin to begin my M.Sc. in Bioinformatics at Freie Universität Berlin.',
   },
   {
     date: 'May 2024',
@@ -68,14 +61,13 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
 
 <Layout
   title="Adina Nadeem - Bioinformatics MSc"
-  description="Portfolio of Adina Nadeem, an MSc Bioinformatics student in Berlin focused on reproducible genomics workflows and biomedical data."
+  description="Portfolio of Adina Nadeem, an MSc Bioinformatics student interested in biological representation learning, machine learning for complex biological data, and reproducible research."
 >
   <div class="container profile-page">
     <section class="intro" aria-labelledby="intro-title">
       <div class="intro-grid">
         <div class="intro-copy">
           <h1 id="intro-title"><span>Adina</span> Nadeem</h1>
-          <p class="intro-subtitle">Bioinformatics MSc | Genomics Workflows | Biomedical Data Systems</p>
 
           <aside class="intro-aside" aria-label="Profile details">
             <img src="/adina-profile.jpg" alt="Adina Nadeem" class="intro-photo" loading="eager" />
@@ -112,37 +104,35 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
             </div>
           </aside>
 
-          <div class="interest-block" aria-label="Broad interests">
-            <p>My broad interests:</p>
-            <ul>
-              {broadInterests.map(item => <li>{item}</li>)}
-            </ul>
+          <div class="interest-block" aria-label="Research interest">
+            <p>My broad interest:</p>
+            <p class="interest-copy">
+              <strong>Learning from biological data</strong> — I’m especially interested in biological representation
+              learning: biology has rules, but it rarely gives us a clean translation guide. I’m curious whether models
+              can help uncover some of its hidden grammar and reveal patterns we did not already know to look for.
+            </p>
           </div>
 
           <div class="bio-copy">
             <p>
-              I'm an <strong>MSc Bioinformatics student at Freie Universitat Berlin</strong>, currently building
-              research experience at the <strong>Max Planck Institute for Infection Biology</strong>. I like the
-              practical middle of bioinformatics: clean workflows, careful quality control, and results that other
-              people can actually rerun.
+              I'm currently an <strong>MSc Bioinformatics student at Freie Universität Berlin</strong>.
             </p>
 
             <p>
-              My work has included RNA-seq and genomics pipelines using <strong>Python</strong>, <strong>R</strong>,
-              <strong>Nextflow</strong>, <strong>Snakemake</strong>, <strong>Docker</strong>, and the usual command-line
-              biology toolkit. I am especially interested in how genomic, clinical, and environmental data can be
-              connected responsibly for precision medicine.
+              At the <strong>Max Planck Institute for Infection Biology</strong>, I work on malaria genomics, conducting
+              single-cell analyses, and analysing amplicon-sequencing data to study malaria transmission dynamics.
             </p>
 
             <p>
-              Right now I'm strengthening my research practice across infection biology, statistical analysis, and
-              workflow engineering while looking for projects where biology and computation meet in a useful way.
+              I am also working on a project that approaches my broader interest question through <strong>ESM-2</strong>, using
+              evolutionary search to study how protein sequences navigate its learned representation landscape and
+              whether different trajectories reveal reproducible patterns of convergence.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="affiliation-strip" aria-label="Current institutions">
+      <div class="affiliation-strip" aria-label="Affiliations">
         {affiliations.map(item => (
           <a
             href={item.href}
@@ -207,7 +197,7 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
 
 .intro h1 {
   margin-top: 0;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.9rem;
   font-size: clamp(2.1rem, 4.2vw, 2.65rem);
 }
 
@@ -215,27 +205,18 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
   color: var(--color-text);
 }
 
-.intro-subtitle {
-  margin-bottom: 1.35rem;
-  font-size: 0.95rem;
-  color: var(--color-text);
-}
-
 .interest-block {
   margin-bottom: 1.3rem;
 }
 
-.interest-block p {
+.interest-block > p:first-child {
   margin-bottom: 0.55rem;
 }
 
-.interest-block ul {
-  margin-left: 1.35rem;
+.interest-copy {
+  max-width: 46rem;
+  margin-bottom: 0;
   color: var(--color-text);
-}
-
-.interest-block li {
-  padding-left: 0.15rem;
 }
 
 .intro-aside {
@@ -254,7 +235,7 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
   aspect-ratio: 1 / 1;
   height: auto;
   margin-inline: auto;
-  border-radius: 3px;
+  border-radius: 18px;
   object-fit: cover;
   object-position: center 36%;
   border: 1px solid var(--color-border);
