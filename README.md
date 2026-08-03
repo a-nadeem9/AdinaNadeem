@@ -1,6 +1,6 @@
 # Adina Nadeem Portfolio
 
-Personal portfolio for biological representation learning, computational biology, and reproducible machine learning research.
+Personal portfolio for bioinformatics
 
 Built with [Astro](https://astro.build/).
 
