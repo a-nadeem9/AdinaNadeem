@@ -48,14 +48,11 @@ const timelineItems = [
   },
 ];
 
-const clustrMapsKey = import.meta.env.PUBLIC_CLUSTRMAPS_KEY || '';
+const defaultClustrMapsKey = 'Q3AGJClcxij9mfuh22uuJoXMk3OBLKP2qPEqSTOobik';
+const clustrMapsKey = import.meta.env.PUBLIC_CLUSTRMAPS_KEY || defaultClustrMapsKey;
 const visitorMapEmbedSrc = import.meta.env.PUBLIC_VISITOR_MAP_EMBED_SRC || '';
-const defaultVisitorMapSrc =
-  'https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=n&d=Q3AGJClcxij9mfuh22uuJoXMk3OBLKP2qPEqSTOobik&co=1f6fa8&cmo=ff0000&cmn=00cc00';
-const clustrMapsSrc = clustrMapsKey
-  ? `https://cdn.clustrmaps.com/map_v2.js?d=${encodeURIComponent(clustrMapsKey)}&cl=ffffff&w=a&t=n`
-  : '';
-const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSrc;
+const clustrMapsSrc = `https://cdn.clustrmaps.com/map_v2.js?d=${encodeURIComponent(clustrMapsKey)}&cl=ffffff&w=a&t=n&co=1f6fa8&cmo=ff0000&cmn=00cc00`;
+const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc;
 
 ---
 
@@ -439,7 +436,9 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc || defaultVisitorMapSr
   max-width: 100%;
 }
 
-.visitor-map-shell :global(#mapmyvisitors-widget) {
+.visitor-map-shell :global(#mapmyvisitors-widget),
+.visitor-map-shell :global(.clustrmaps-map),
+.visitor-map-shell :global(.clustrmaps-map-container) {
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 auto !important;

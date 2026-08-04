@@ -129,6 +129,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </script>
 
   <script is:inline>
+    function visitorMapHasRendered(shell) {
+      return Boolean(shell.querySelector(
+        '#mapmyvisitors-widget, .clustrmaps-map, .clustrmaps-map-container, canvas, svg, iframe, img, a'
+      ));
+    }
+
+    function hideVisitorMap(section, shell) {
+      section.hidden = true;
+      shell.innerHTML = '';
+      shell.removeAttribute('data-loading-src');
+      shell.removeAttribute('data-loaded-src');
+    }
+
     function initVisitorMap() {
       var section = document.querySelector('[data-visitor-map-src]');
       if (!section) return;
@@ -137,27 +150,52 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       var shell = document.getElementById('visitor-map-shell');
       if (!src || !shell) return;
 
-      var existingWidget = shell.querySelector('#mapmyvisitors-widget');
-      if (shell.getAttribute('data-loaded-src') === src && existingWidget) return;
+      if (shell.getAttribute('data-loaded-src') === src && visitorMapHasRendered(shell)) {
+        section.hidden = false;
+        return;
+      }
+      if (shell.getAttribute('data-loading-src') === src) return;
 
-      document.querySelectorAll('script#mapmyvisitors').forEach(function(script) {
+      document.querySelectorAll('script#clustrmaps, script#mapmyvisitors').forEach(function(script) {
         if (script.parentElement !== shell) script.remove();
       });
-      document.querySelectorAll('#mapmyvisitors-widget').forEach(function(widget) {
+      document.querySelectorAll('#mapmyvisitors-widget, .clustrmaps-map, .clustrmaps-map-container').forEach(function(widget) {
         if (!shell.contains(widget)) widget.remove();
       });
       document.querySelectorAll('.jvectormap-tip').forEach(function(tip) {
         tip.remove();
       });
 
-      shell.setAttribute('data-loaded-src', src);
+      section.hidden = false;
+      shell.setAttribute('data-loading-src', src);
+      shell.removeAttribute('data-loaded-src');
       shell.innerHTML = '';
 
       var script = document.createElement('script');
       script.type = 'text/javascript';
-      script.id = 'mapmyvisitors';
+      script.id = 'clustrmaps';
       script.src = src;
+      script.onerror = function() {
+        hideVisitorMap(section, shell);
+      };
       shell.appendChild(script);
+
+      var attempts = 0;
+      var renderCheck = window.setInterval(function() {
+        attempts += 1;
+
+        if (visitorMapHasRendered(shell)) {
+          window.clearInterval(renderCheck);
+          shell.removeAttribute('data-loading-src');
+          shell.setAttribute('data-loaded-src', src);
+          return;
+        }
+
+        if (attempts >= 24) {
+          window.clearInterval(renderCheck);
+          hideVisitorMap(section, shell);
+        }
+      }, 250);
     }
 
     initVisitorMap();
