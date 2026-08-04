@@ -48,13 +48,11 @@ const timelineItems = [
   },
 ];
 
-const defaultMapMyVisitorsKey = 'wYIz1kYeFWrczfQawTHC_KXhGVWQJGzXOjWgN6ONcAI';
+const defaultMapMyVisitorsKey = 'iyHOuSXOuyzJU7Wg20gI3dp8vVRLSMxuGfvfe03TqWo';
 const mapMyVisitorsKey = import.meta.env.PUBLIC_MAPMYVISITORS_KEY || defaultMapMyVisitorsKey;
 const visitorMapEmbedSrc = import.meta.env.PUBLIC_VISITOR_MAP_EMBED_SRC || '';
-const mapMyVisitorsSrc = `https://mapmyvisitors.com/map.js?d=${encodeURIComponent(mapMyVisitorsKey)}&cl=ffffff&w=a`;
+const mapMyVisitorsSrc = `https://mapmyvisitors.com/map.js?cl=ffffff&w=792&t=n&d=${encodeURIComponent(mapMyVisitorsKey)}`;
 const visitorMapSrc = visitorMapEmbedSrc || mapMyVisitorsSrc;
-const visitorMapImageSrc = `https://mapmyvisitors.com/map.png?d=${encodeURIComponent(mapMyVisitorsKey)}&cl=ffffff`;
-const visitorMapStatsHref = 'https://mapmyvisitors.com/web/1c76s';
 
 ---
 
@@ -166,18 +164,15 @@ const visitorMapStatsHref = 'https://mapmyvisitors.com/web/1c76s';
       class="visitor-map-section"
       aria-label="Recent visitor map"
       data-visitor-map-src={visitorMapSrc}
-      data-visitor-map-image-src={visitorMapImageSrc}
-      data-visitor-map-stats-href={visitorMapStatsHref}
     >
       <div class="visitor-map-shell" id="visitor-map-shell">
-        {visitorMapSrc ? (
-          <div class="visitor-map-loading">Loading map...</div>
-        ) : (
-          <div class="visitor-map-placeholder">
-            <span>ClustrMaps visitor map</span>
-            <small>Add the widget key to show live visits.</small>
-          </div>
-        )}
+        <script
+          is:inline
+          data-astro-rerun
+          type="text/javascript"
+          id="mapmyvisitors"
+          src={visitorMapSrc}
+        ></script>
       </div>
     </section>
   </div>
@@ -204,10 +199,12 @@ const visitorMapStatsHref = 'https://mapmyvisitors.com/web/1c76s';
   margin-top: 0;
   margin-bottom: 0.9rem;
   font-size: clamp(2.1rem, 4.2vw, 2.65rem);
+  font-weight: 400;
 }
 
 .intro h1 span {
   color: var(--color-text);
+  font-weight: 800;
 }
 
 .interest-block {
@@ -431,10 +428,9 @@ const visitorMapStatsHref = 'https://mapmyvisitors.com/web/1c76s';
 
 .visitor-map-shell {
   position: relative;
+  display: flex;
+  justify-content: center;
   width: 100%;
-  min-height: 300px;
-  overflow: hidden;
-  background: #1f6fa8;
 }
 
 .visitor-map-shell :global(canvas),
@@ -447,51 +443,8 @@ const visitorMapStatsHref = 'https://mapmyvisitors.com/web/1c76s';
 .visitor-map-shell :global(#mapmyvisitors-widget),
 .visitor-map-shell :global(.clustrmaps-map),
 .visitor-map-shell :global(.clustrmaps-map-container) {
-  width: 100% !important;
   max-width: 100% !important;
   margin: 0 auto !important;
-}
-
-.visitor-map-shell :global(.visitor-map-fallback) {
-  display: block;
-  width: 100%;
-}
-
-.visitor-map-shell :global(.visitor-map-fallback img) {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.visitor-map-loading {
-  min-height: 300px;
-  display: grid;
-  place-items: center;
-  color: #ffffff;
-}
-
-.visitor-map-placeholder {
-  width: 100%;
-  min-height: 300px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 0.45rem;
-  color: #ffffff;
-  background: #1f6fa8;
-  text-align: center;
-}
-
-.visitor-map-placeholder span {
-  font-weight: 800;
-}
-
-.visitor-map-placeholder small {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.visitor-map-placeholder code {
-  color: #ffffff;
 }
 
 @media (max-width: 760px) {
@@ -524,12 +477,6 @@ const visitorMapStatsHref = 'https://mapmyvisitors.com/web/1c76s';
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 0.3rem;
-  }
-
-  .visitor-map-shell,
-  .visitor-map-loading,
-  .visitor-map-placeholder {
-    min-height: 230px;
   }
 }
 

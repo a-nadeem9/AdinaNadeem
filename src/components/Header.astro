@@ -4,10 +4,17 @@
 <header class="site-header">
   <div class="hdr-inner container">
     <div class="brand-stack">
-      <a href="/" class="brand" aria-label="Home">
-        <img class="brand-logo" src="/an-logo.svg?v=4" alt="" width="48" height="52" />
-        <span>Adina Nadeem</span>
-      </a>
+      <div class="header-socials" aria-label="Contact links">
+        <a href="mailto:adinanadeem@gmail.com" class="header-social-link" aria-label="Email Adina Nadeem" title="Email">
+          <img src="/icons/header-email.svg" alt="" width="28" height="28" />
+        </a>
+        <a href="https://github.com/a-nadeem9" class="header-social-link" target="_blank" rel="noopener" aria-label="Adina Nadeem on GitHub" title="GitHub">
+          <img src="/icons/header-github.svg" alt="" width="26" height="26" />
+        </a>
+        <a href="https://www.linkedin.com/in/adinanadeem/" class="header-social-link" target="_blank" rel="noopener" aria-label="Adina Nadeem on LinkedIn" title="LinkedIn">
+          <img src="/icons/header-linkedin.svg" alt="" width="25" height="25" />
+        </a>
+      </div>
 
       <nav class="desk-nav" aria-label="Main navigation">
         <a href="/" class="nav-link" data-path="/"><span>About</span></a>
@@ -54,31 +61,39 @@
 .brand-stack {
   display: block;
 }
-.brand {
-  display: inline-flex;
+
+.header-socials {
+  display: flex;
   align-items: center;
-  gap: 1.15rem;
-  font-family: var(--font-heading);
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: var(--color-text);
-  letter-spacing: 0;
-  white-space: nowrap;
-  transition: opacity 0.15s;
+  gap: 0.35rem;
+  min-height: 30px;
 }
-.brand:hover { opacity: 0.75; }
-.brand-logo {
+
+.header-social-link {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  color: var(--color-muted);
+  opacity: 0.78;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.header-social-link:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.header-social-link img {
   display: block;
-  width: 54px;
-  height: 56px;
-  object-fit: contain;
-  object-position: center;
+  width: auto;
+  max-width: 100%;
+  height: auto;
   flex: 0 0 auto;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+}
+
+.dark .header-social-link img {
+  filter: invert(1);
 }
 
 .desk-nav {
@@ -86,8 +101,8 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0;
-  margin-top: 0.55rem;
-  margin-left: 75px;
+  margin-top: 0.65rem;
+  margin-left: 0;
 }
 
 .nav-link {
@@ -190,13 +205,6 @@
   }
   .brand-stack {
     display: block;
-  }
-  .brand {
-    font-size: 1.05rem;
-  }
-  .brand-logo {
-    width: 40px;
-    height: 42px;
   }
   .desk-nav { display: none; }
   .mob-only { display: flex; }
