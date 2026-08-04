@@ -48,11 +48,13 @@ const timelineItems = [
   },
 ];
 
-const defaultClustrMapsKey = 'Q3AGJClcxij9mfuh22uuJoXMk3OBLKP2qPEqSTOobik';
-const clustrMapsKey = import.meta.env.PUBLIC_CLUSTRMAPS_KEY || defaultClustrMapsKey;
+const defaultMapMyVisitorsKey = 'wYIz1kYeFWrczfQawTHC_KXhGVWQJGzXOjWgN6ONcAI';
+const mapMyVisitorsKey = import.meta.env.PUBLIC_MAPMYVISITORS_KEY || defaultMapMyVisitorsKey;
 const visitorMapEmbedSrc = import.meta.env.PUBLIC_VISITOR_MAP_EMBED_SRC || '';
-const clustrMapsSrc = `https://cdn.clustrmaps.com/map_v2.js?d=${encodeURIComponent(clustrMapsKey)}&cl=ffffff&w=a&t=n&co=1f6fa8&cmo=ff0000&cmn=00cc00`;
-const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc;
+const mapMyVisitorsSrc = `https://mapmyvisitors.com/map.js?d=${encodeURIComponent(mapMyVisitorsKey)}&cl=ffffff&w=a`;
+const visitorMapSrc = visitorMapEmbedSrc || mapMyVisitorsSrc;
+const visitorMapImageSrc = `https://mapmyvisitors.com/map.png?d=${encodeURIComponent(mapMyVisitorsKey)}&cl=ffffff`;
+const visitorMapStatsHref = 'https://mapmyvisitors.com/web/1c76s';
 
 ---
 
@@ -160,7 +162,13 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc;
       </div>
     </section>
 
-    <section class="visitor-map-section" aria-label="Recent visitor map" data-visitor-map-src={visitorMapSrc}>
+    <section
+      class="visitor-map-section"
+      aria-label="Recent visitor map"
+      data-visitor-map-src={visitorMapSrc}
+      data-visitor-map-image-src={visitorMapImageSrc}
+      data-visitor-map-stats-href={visitorMapStatsHref}
+    >
       <div class="visitor-map-shell" id="visitor-map-shell">
         {visitorMapSrc ? (
           <div class="visitor-map-loading">Loading map...</div>
@@ -442,6 +450,17 @@ const visitorMapSrc = visitorMapEmbedSrc || clustrMapsSrc;
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 auto !important;
+}
+
+.visitor-map-shell :global(.visitor-map-fallback) {
+  display: block;
+  width: 100%;
+}
+
+.visitor-map-shell :global(.visitor-map-fallback img) {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .visitor-map-loading {

@@ -131,15 +131,42 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <script is:inline>
     function visitorMapHasRendered(shell) {
       return Boolean(shell.querySelector(
-        '#mapmyvisitors-widget, .clustrmaps-map, .clustrmaps-map-container, canvas, svg, iframe, img, a'
+        '#mapmyvisitors-widget, .clustrmaps-map, .clustrmaps-map-container, canvas, svg, iframe'
       ));
     }
 
-    function hideVisitorMap(section, shell) {
-      section.hidden = true;
+    function showVisitorMapFallback(section, shell) {
+      if (shell.getAttribute('data-fallback-shown') === 'true') return;
+
+      var imageSrc = section.getAttribute('data-visitor-map-image-src');
+      var statsHref = section.getAttribute('data-visitor-map-stats-href');
+      if (!imageSrc || !statsHref) {
+        section.hidden = true;
+        return;
+      }
+
       shell.innerHTML = '';
+      shell.setAttribute('data-fallback-shown', 'true');
       shell.removeAttribute('data-loading-src');
-      shell.removeAttribute('data-loaded-src');
+      shell.setAttribute('data-loaded-src', section.getAttribute('data-visitor-map-src') || '');
+
+      var link = document.createElement('a');
+      link.className = 'visitor-map-fallback';
+      link.href = statsHref;
+      link.title = 'Visit tracker';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+
+      var image = document.createElement('img');
+      image.src = imageSrc;
+      image.alt = 'Map showing recent website visitors';
+      image.decoding = 'async';
+      image.onerror = function() {
+        section.hidden = true;
+      };
+
+      link.appendChild(image);
+      shell.appendChild(link);
     }
 
     function initVisitorMap() {
@@ -150,7 +177,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       var shell = document.getElementById('visitor-map-shell');
       if (!src || !shell) return;
 
-      if (shell.getAttribute('data-loaded-src') === src && visitorMapHasRendered(shell)) {
+      if (
+        shell.getAttribute('data-loaded-src') === src &&
+        (visitorMapHasRendered(shell) || shell.getAttribute('data-fallback-shown') === 'true')
+      ) {
         section.hidden = false;
         return;
       }
@@ -169,31 +199,35 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       section.hidden = false;
       shell.setAttribute('data-loading-src', src);
       shell.removeAttribute('data-loaded-src');
+      shell.removeAttribute('data-fallback-shown');
       shell.innerHTML = '';
 
       var script = document.createElement('script');
       script.type = 'text/javascript';
-      script.id = 'clustrmaps';
+      script.id = 'mapmyvisitors';
       script.src = src;
+      var renderCheck;
       script.onerror = function() {
-        hideVisitorMap(section, shell);
+        if (renderCheck) window.clearInterval(renderCheck);
+        showVisitorMapFallback(section, shell);
       };
       shell.appendChild(script);
 
       var attempts = 0;
-      var renderCheck = window.setInterval(function() {
+      renderCheck = window.setInterval(function() {
         attempts += 1;
 
         if (visitorMapHasRendered(shell)) {
           window.clearInterval(renderCheck);
           shell.removeAttribute('data-loading-src');
+          shell.removeAttribute('data-fallback-shown');
           shell.setAttribute('data-loaded-src', src);
           return;
         }
 
         if (attempts >= 24) {
           window.clearInterval(renderCheck);
-          hideVisitorMap(section, shell);
+          showVisitorMapFallback(section, shell);
         }
       }, 250);
     }
