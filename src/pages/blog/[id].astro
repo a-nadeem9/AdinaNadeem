@@ -24,9 +24,8 @@ const formatDate = (date: Date) =>
 
 <Layout title={`${post.data.title} - Blog | Adina Nadeem`} description={post.data.description}>
   <article class="container blog-post">
-    <a href="/blog" class="back-link">Back to Blog</a>
+    <a href="/blog" class="back-link" aria-label="Back to Blog">&lt;</a>
     <header class="post-header">
-      <p class="eyebrow">Blog</p>
       {post.data.titleImage ? (
         <h1 class="post-title-art">
           <img src={post.data.titleImage} alt={post.data.titleImageAlt || post.data.title} />
@@ -51,8 +50,9 @@ const formatDate = (date: Date) =>
 .back-link {
   display: inline-block;
   font-family: var(--font-sans);
-  font-size: 0.86rem;
+  font-size: 1.35rem;
   font-weight: 600;
+  line-height: 1;
   color: var(--color-accent);
   margin-bottom: 1.5rem;
 }
@@ -60,15 +60,6 @@ const formatDate = (date: Date) =>
   border-bottom: 1px solid var(--color-border);
   padding-bottom: 2rem;
   margin-bottom: 2.4rem;
-}
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-secondary);
-  margin-bottom: 1rem;
 }
 .post-header h1 {
   max-width: 1120px;
@@ -94,6 +85,12 @@ const formatDate = (date: Date) =>
 }
 .post-body :global(p) {
   margin-bottom: 1.15rem;
+}
+.post-body :global(.post-deck) {
+  color: #b80f5f;
+}
+:global(.dark) .post-body :global(.post-deck) {
+  color: #ff3f9d;
 }
 .post-body :global(figure) {
   margin: 2rem 0 2.25rem;

@@ -7,7 +7,7 @@ titleImageAlt: "A String of A's and the End That Started Everything"
 draft: false
 ---
 
-*How mapping soybean mRNA 3′ ends led me to Nextflow, Docker, and my first research pipeline*
+<p class="post-deck"><em>How mapping soybean mRNA 3′ ends led me to Nextflow, Docker, and my first research pipeline</em></p>
 
 A few years ago, during my undergrad, I was given a task to write Python scripts to detect poly(A) tail signal in soybean RNA-seq reads. At the time, I didn't think much of the task itself because it seemed too easy: find reads with a leftover poly(A)/poly(T) stretch, trim it, re-align the cleaned sequence. But I was in for a surprise.
 
