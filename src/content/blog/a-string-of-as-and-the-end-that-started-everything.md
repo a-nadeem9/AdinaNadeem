@@ -2,12 +2,10 @@
 title: "A String of A’s and the End That Started Everything"
 description: "How mapping soybean mRNA 3′ ends led me to Nextflow, Docker, and my first research pipeline."
 pubDate: 2025-05-02
+titleImage: "/blog-assets/poly-a-pipeline/a-string-of-as-title.png"
+titleImageAlt: "A String of A's and the End That Started Everything"
 draft: false
 ---
-
-<figure class="title-art">
-  <img src="/blog-assets/poly-a-pipeline/a-string-of-as-title.png" alt="Handwritten title: A String of A's and the End That Started Everything">
-</figure>
 
 *How mapping soybean mRNA 3′ ends led me to Nextflow, Docker, and my first research pipeline*
 

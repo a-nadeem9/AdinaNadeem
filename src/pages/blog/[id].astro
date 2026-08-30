@@ -27,7 +27,13 @@ const formatDate = (date: Date) =>
     <a href="/blog" class="back-link">Back to Blog</a>
     <header class="post-header">
       <p class="eyebrow">Blog</p>
-      <h1>{post.data.title}</h1>
+      {post.data.titleImage ? (
+        <h1 class="post-title-art">
+          <img src={post.data.titleImage} alt={post.data.titleImageAlt || post.data.title} />
+        </h1>
+      ) : (
+        <h1>{post.data.title}</h1>
+      )}
       <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
     </header>
 
@@ -67,6 +73,15 @@ const formatDate = (date: Date) =>
 .post-header h1 {
   max-width: 1120px;
   margin-bottom: 0.8rem;
+}
+.post-header .post-title-art {
+  font-size: 0;
+  line-height: 0;
+}
+.post-title-art img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .post-header time {
   font-family: var(--font-sans);
