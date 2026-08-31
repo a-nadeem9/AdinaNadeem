@@ -86,10 +86,16 @@ const formatDate = (date: Date) =>
   margin-bottom: 1.15rem;
 }
 .post-body :global(.post-deck) {
-  color: #b80f5f;
+  color: #0767b2;
 }
 :global(.dark) .post-body :global(.post-deck) {
-  color: #ff3f9d;
+  color: #69b7ff;
+}
+.post-body :global(.lead-question) {
+  color: #54206f;
+}
+:global(.dark) .post-body :global(.lead-question) {
+  color: #c99be2;
 }
 .post-body :global(figure) {
   margin: 2rem 0 2.25rem;
@@ -108,6 +114,11 @@ const formatDate = (date: Date) =>
 }
 .post-body :global(img) {
   height: auto;
+}
+.post-body :global(.media-kicker) {
+  margin-top: 2rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.9rem;
 }
 .post-body :global(.interactive-frame) {
   min-height: 620px;
