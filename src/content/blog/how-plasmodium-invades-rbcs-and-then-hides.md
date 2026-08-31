@@ -39,9 +39,9 @@ PfEMP1 is made up of two main domain types:
 
 ### 2.1 Var Genes and Antigenic Variation
 
-PfEMP1 isn't encoded by one gene—it's encoded by an entire family of roughly 60 related but distinct genes called **var genes**, clustered mostly near the chromosome ends. “Multicopy” doesn't mean identical copies here; each var gene is basically an alternate recipe for PfEMP1, producing a structurally different variant.
+PfEMP1 is not encoded by one gene - it's encoded by an entire family of roughly 60 related but distinct genes called var genes, clustered mostly near the chromosome ends. “Multicopy” doesn't mean identical copies here; each var gene is basically an alternate recipe for PfEMP1, producing a structurally different variant.
 
-The parasite only switches on **one var gene at a time** through mutually exclusive, monoallelic expression. Since your immune system builds antibodies against whatever variant it has already seen, the parasite periodically swaps which gene is active and changes its surface disguise. It's not a single hiding trick; it's a constant identity change that keeps it one step ahead of your adaptive immune system.
+The parasite only switches on one var gene at a time through mutually exclusive, monoallelic expression. Since your immune system builds antibodies against whatever variant it has already seen, the parasite periodically swaps which gene is active and changes its surface disguise. It's not a single hiding trick; it's a constant identity shuffling that keeps it one step ahead of your adaptive immune system.
 
 Which CIDR domain a var gene has, and which genomic class it belongs to, seems to loosely predict how severe the resulting infection is:
 
