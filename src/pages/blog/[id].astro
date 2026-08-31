@@ -91,6 +91,12 @@ const formatDate = (date: Date) =>
 :global(.dark) .post-body :global(.post-deck) {
   color: #69b7ff;
 }
+.post-body :global(.post-deck-orange) {
+  color: #b44900;
+}
+:global(.dark) .post-body :global(.post-deck-orange) {
+  color: #ff9c57;
+}
 .post-body :global(.lead-question) {
   color: #54206f;
 }
@@ -99,6 +105,48 @@ const formatDate = (date: Date) =>
 }
 .post-body :global(figure) {
   margin: 2rem 0 2.25rem;
+}
+.post-body :global(.protein-figure) {
+  max-width: 760px;
+}
+.post-body :global(.protein-key) {
+  font-weight: 700;
+}
+.post-body :global(.protein-key--nts) {
+  color: #8a6200;
+}
+.post-body :global(.protein-key--dbl-alpha) {
+  color: #00798f;
+}
+.post-body :global(.protein-key--cidr-alpha) {
+  color: #b44900;
+}
+.post-body :global(.protein-key--dbl-gamma) {
+  color: #6d2d88;
+}
+.post-body :global(.protein-key--tm) {
+  color: #00784b;
+}
+.post-body :global(.protein-key--ats) {
+  color: #185ea8;
+}
+:global(.dark) .post-body :global(.protein-key--nts) {
+  color: #ffd75e;
+}
+:global(.dark) .post-body :global(.protein-key--dbl-alpha) {
+  color: #5bd9ed;
+}
+:global(.dark) .post-body :global(.protein-key--cidr-alpha) {
+  color: #ff9c57;
+}
+:global(.dark) .post-body :global(.protein-key--dbl-gamma) {
+  color: #d3a0eb;
+}
+:global(.dark) .post-body :global(.protein-key--tm) {
+  color: #5ad69c;
+}
+:global(.dark) .post-body :global(.protein-key--ats) {
+  color: #74b5ff;
 }
 .post-body :global(.wide-embed) {
   width: min(1120px, calc(100vw - 2.4rem));
@@ -145,6 +193,9 @@ const formatDate = (date: Date) =>
 .post-body :global(li) {
   margin-bottom: 0.35rem;
 }
+.post-body :global(.protein-domain-list) {
+  color: var(--color-text);
+}
 .post-body :global(a) {
   color: var(--color-accent);
   border-bottom: 1px solid currentColor;
@@ -158,10 +209,244 @@ const formatDate = (date: Date) =>
   padding: 0.08rem 0.28rem;
   border-radius: 4px;
 }
+.post-body :global(.table-scroll) {
+  width: 100%;
+  margin: 0.8rem 0 2rem;
+  overflow-x: auto;
+}
+.post-body :global(table) {
+  width: 100%;
+  min-width: 720px;
+  border: 1px solid #cfcfcf;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 5px;
+  background: var(--color-surface);
+}
+.post-body :global(caption) {
+  caption-side: bottom;
+  padding: 0.7rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.55;
+  text-align: left;
+}
+.post-body :global(th),
+.post-body :global(td) {
+  padding: 0.75rem 0.85rem;
+  border-right: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+.post-body :global(th:last-child),
+.post-body :global(td:last-child) {
+  border-right: 0;
+}
+.post-body :global(tbody tr:last-child td) {
+  border-bottom: 0;
+}
+.post-body :global(th) {
+  color: var(--color-text);
+  background: #ffe4cf;
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+:global(.dark) .post-body :global(table),
+:global(.dark) .post-body :global(th),
+:global(.dark) .post-body :global(td) {
+  border-color: #555b60;
+}
+:global(.dark) .post-body :global(th) {
+  background: #5a3522;
+}
+.post-body :global(.notes-divider) {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3.6rem 0 2.4rem;
+  color: var(--color-muted);
+  font-size: 1.25rem;
+}
+.post-body :global(.notes-divider::before),
+.post-body :global(.notes-divider::after) {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+.post-body :global(.notes-section) {
+  max-width: 860px;
+}
+.post-body :global(.notes-section h2) {
+  margin-top: 0;
+}
+.post-body :global(.notes-book) {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.1rem minmax(0, 1fr) 3.1rem;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.3rem 1rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-surface2) 82%, #8b5a2b 18%);
+  box-shadow: 0 18px 42px rgb(0 0 0 / 14%);
+}
+.post-body :global(.notes-book::before) {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 1px;
+  background: rgb(0 0 0 / 8%);
+  pointer-events: none;
+}
+.post-body :global(.notes-book__page-frame) {
+  grid-column: 2;
+  position: relative;
+  aspect-ratio: 595 / 842;
+  overflow: hidden;
+  border: 1px solid #d5d0c5;
+  border-radius: 3px 8px 8px 3px;
+  background: #fffefb;
+  box-shadow: -10px 8px 22px rgb(0 0 0 / 18%), inset 12px 0 18px rgb(80 55 20 / 7%);
+  transform-origin: left center;
+}
+.post-body :global(.notes-book__page-frame.is-turning-next) {
+  animation: notes-turn-next 280ms ease;
+}
+.post-body :global(.notes-book__page-frame.is-turning-previous) {
+  animation: notes-turn-previous 280ms ease;
+}
+.post-body :global(.notes-book__page-frame img) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 0;
+  background: #fff;
+}
+.post-body :global(.notes-book__page-frame img[hidden]) {
+  display: none;
+}
+.post-body :global(.notes-book__arrow) {
+  display: grid;
+  width: 2.65rem;
+  height: 2.65rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-text);
+  background: var(--color-surface);
+  font: 700 1.25rem/1 var(--font-sans);
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease, transform 150ms ease, opacity 150ms ease;
+}
+.post-body :global(.notes-book__arrow:hover:not(:disabled)),
+.post-body :global(.notes-book__arrow:focus-visible) {
+  color: var(--color-accent);
+  border-color: currentColor;
+  transform: scale(1.06);
+}
+.post-body :global(.notes-book__arrow:disabled) {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+.post-body :global(.notes-book__arrow--previous) {
+  grid-column: 1;
+}
+.post-body :global(.notes-book__arrow--next) {
+  grid-column: 3;
+}
+.post-body :global(.notes-book__counter) {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--color-muted);
+  font: 600 0.78rem/1.2 var(--font-sans);
+  text-align: center;
+}
+
+@keyframes notes-turn-next {
+  0% { opacity: 1; transform: perspective(1200px) rotateY(0); }
+  48% { opacity: 0.45; transform: perspective(1200px) rotateY(-7deg) translateX(-5px); }
+  100% { opacity: 1; transform: perspective(1200px) rotateY(0); }
+}
+
+@keyframes notes-turn-previous {
+  0% { opacity: 1; transform: perspective(1200px) rotateY(0); }
+  48% { opacity: 0.45; transform: perspective(1200px) rotateY(7deg) translateX(5px); }
+  100% { opacity: 1; transform: perspective(1200px) rotateY(0); }
+}
 
 @media (max-width: 900px) {
   .post-body :global(.interactive-frame) {
     height: 1280px;
   }
 }
+
+@media (max-width: 600px) {
+  .post-body :global(.notes-book) {
+    grid-template-columns: 2.4rem minmax(0, 1fr) 2.4rem;
+    gap: 0.45rem;
+    padding: 0.8rem 0.45rem 0.7rem;
+  }
+  .post-body :global(.notes-book__arrow) {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1rem;
+  }
+}
 </style>
+
+<script>
+  const books = document.querySelectorAll('[data-notes-book]');
+
+  books.forEach((book) => {
+    const pages = Array.from(book.querySelectorAll('[data-notes-page]'));
+    const previousButton = book.querySelector('[data-notes-previous]');
+    const nextButton = book.querySelector('[data-notes-next]');
+    const currentLabel = book.querySelector('[data-notes-current]');
+    const totalLabel = book.querySelector('[data-notes-total]');
+    const frame = book.querySelector('[data-notes-page-frame]');
+    let currentPage = 0;
+
+    if (!(previousButton instanceof HTMLButtonElement) ||
+        !(nextButton instanceof HTMLButtonElement) ||
+        !(currentLabel instanceof HTMLElement) ||
+        !(totalLabel instanceof HTMLElement) ||
+        !(frame instanceof HTMLElement) ||
+        pages.length === 0) return;
+
+    const updateControls = () => {
+      currentLabel.textContent = String(currentPage + 1);
+      totalLabel.textContent = String(pages.length);
+      previousButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage === pages.length - 1;
+    };
+
+    const showPage = (nextPage, direction) => {
+      if (nextPage < 0 || nextPage >= pages.length || nextPage === currentPage) return;
+
+      frame.classList.remove('is-turning-next', 'is-turning-previous');
+      void frame.offsetWidth;
+      frame.classList.add(direction === 'next' ? 'is-turning-next' : 'is-turning-previous');
+
+      window.setTimeout(() => {
+        pages[currentPage].hidden = true;
+        pages[nextPage].hidden = false;
+        currentPage = nextPage;
+        updateControls();
+      }, 130);
+
+      window.setTimeout(() => {
+        frame.classList.remove('is-turning-next', 'is-turning-previous');
+      }, 300);
+    };
+
+    previousButton.addEventListener('click', () => showPage(currentPage - 1, 'previous'));
+    nextButton.addEventListener('click', () => showPage(currentPage + 1, 'next'));
+    updateControls();
+  });
+</script>
