@@ -7,12 +7,14 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  homeHeader?: boolean;
 }
 
 const {
   title = 'Adina Nadeem - Bioinformatics MSc | Biological Representation Learning',
   description = 'Portfolio of Adina Nadeem, an MSc Bioinformatics student interested in biological representation learning, protein language models, and reproducible machine learning for biology.',
   ogImage = '/adina-profile.jpg',
+  homeHeader = true,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -56,9 +58,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
   <ClientRouter />
 </head>
-<body>
+<body class:list={{ 'home-layout': homeHeader }}>
   <div class="scroll-progress" aria-hidden="true"></div>
-  <Header />
+  <Header compactHome={homeHeader} />
 
   <main id="main-content">
     <slot />
@@ -181,6 +183,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     transform: scaleX(0);
     transform-origin: left center;
     pointer-events: none;
+  }
+  .home-layout .scroll-progress {
+    display: none;
   }
   #main-content {
     padding-top: 0;

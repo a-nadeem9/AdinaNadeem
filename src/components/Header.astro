@@ -1,8 +1,17 @@
 ---
+interface Props {
+  compactHome?: boolean;
+}
+
+const { compactHome = false } = Astro.props;
 ---
 
-<header class="site-header">
+<header class:list={['site-header', { 'site-header--home': compactHome }]}>
   <div class="hdr-inner container">
+    {compactHome && (
+      <a href="/" class="home-identity">Adina Nadeem <span>/ computational biology</span></a>
+    )}
+
     <div class="brand-stack">
       <div class="header-socials" aria-label="Contact links">
         <a href="mailto:adinanadeem@gmail.com" class="header-social-link" aria-label="Email Adina Nadeem" title="Email">
@@ -38,7 +47,7 @@
   </div>
 </header>
 
-<div id="mob-menu" class="mob-menu" aria-hidden="true">
+<div id="mob-menu" class:list={['mob-menu', { 'mob-menu--home': compactHome }]} aria-hidden="true">
   <a href="/" class="mob-link">About</a>
   <a href="/projects" class="mob-link">Projects</a>
   <a href="/blog" class="mob-link">Blog</a>
@@ -56,6 +65,80 @@
   padding-top: 1.7rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--color-border);
+}
+
+.home-identity {
+  display: none;
+}
+
+.site-header.site-header--home {
+  min-height: 50px;
+  background: #1b1b1b;
+}
+
+.site-header--home .hdr-inner {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  max-width: none;
+  min-height: 50px;
+  padding: 0.5rem 2rem;
+  border-bottom: 0;
+}
+
+.site-header--home .home-identity {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.38rem;
+  color: #f4f4f4;
+  padding-block: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.site-header--home .home-identity span {
+  color: #bdbdbd;
+  font-weight: 400;
+}
+
+.site-header--home .brand-stack {
+  justify-self: end;
+}
+
+.site-header--home .header-socials,
+.site-header--home .hdr-controls {
+  display: none;
+}
+
+.site-header--home .desk-nav {
+  margin: 0;
+}
+
+.site-header--home .nav-link {
+  padding: 0.4rem 0.75rem;
+  border: 0;
+  color: #d4d4d4;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.12rem;
+}
+
+.site-header--home .nav-link:last-child {
+  padding-right: 0;
+}
+
+.site-header--home .nav-link:hover,
+.site-header--home .nav-link[aria-current="page"] {
+  color: #ffffff;
+}
+
+.site-header--home .nav-link[aria-current="page"] span {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .brand-stack {
@@ -209,6 +292,52 @@
   .desk-nav { display: none; }
   .mob-only { display: flex; }
   .mob-menu { display: flex; }
+
+  .site-header--home .hdr-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0.5rem 1rem;
+  }
+
+  .site-header--home .home-identity {
+    font-size: 0.82rem;
+  }
+
+  .site-header--home .home-identity span {
+    display: none;
+  }
+
+  .site-header--home .brand-stack {
+    display: none;
+  }
+
+  .site-header--home .hdr-controls {
+    display: flex;
+    justify-self: end;
+    padding: 0;
+  }
+
+  .site-header--home #dark-toggle {
+    display: none;
+  }
+
+  .site-header--home .icon-btn {
+    width: 30px;
+    height: 30px;
+    border-color: #555555;
+    background: transparent;
+    color: #f4f4f4;
+  }
+
+  .mob-menu--home {
+    top: 50px;
+    background: #1b1b1b;
+    border-bottom-color: #424242;
+  }
+
+  .mob-menu--home .mob-link {
+    color: #f4f4f4;
+    border-bottom-color: #424242;
+  }
 }
 </style>
 
@@ -253,6 +382,8 @@
       mFresh.addEventListener('click', function() {
         var open = mobMenu.classList.toggle('open');
         mFresh.setAttribute('aria-expanded', String(open));
+        mFresh.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        mobMenu.setAttribute('aria-hidden', String(!open));
         var hb = document.getElementById('i-hburg');
         var ic = document.getElementById('i-close');
         if (hb) hb.style.display = open ? 'none' : 'block';
