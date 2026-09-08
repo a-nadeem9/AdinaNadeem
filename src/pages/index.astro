@@ -4,7 +4,7 @@ const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/a-nadeem9', icon: 'github' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/adinanadeem/', icon: 'linkedin' },
   { label: 'Email', href: 'mailto:adinanadeem@gmail.com', icon: 'mail' },
-  { label: 'Resume', href: '/journey', icon: 'file' },
+  { label: 'Resume', href: '/Adina_Nadeem_CV.pdf', icon: 'file' },
 ];
 
 const affiliations = [
@@ -72,7 +72,7 @@ const visitorMapSrc = visitorMapEmbedSrc || mapMyVisitorsSrc;
 
             <div class="social-row" aria-label="Profile links">
               {socialLinks.map(link => (
-                <a href={link.href} class="social-link" target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener' : undefined}>
+                <a href={link.href} class="social-link" target={link.href.startsWith('http') || link.href.endsWith('.pdf') ? '_blank' : undefined} rel={link.href.startsWith('http') || link.href.endsWith('.pdf') ? 'noopener' : undefined}>
                   <span class="social-icon" aria-hidden="true">
                     {link.icon === 'github' && (
                       <svg viewBox="0 0 24 24" role="img">
