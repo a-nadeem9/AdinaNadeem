@@ -401,52 +401,63 @@ const formatDate = (date: Date) =>
 </style>
 
 <script>
-  const books = document.querySelectorAll('[data-notes-book]');
+  function initNotesBooks() {
+    const books = document.querySelectorAll('[data-notes-book]');
 
-  books.forEach((book) => {
-    const pages = Array.from(book.querySelectorAll('[data-notes-page]'));
-    const previousButton = book.querySelector('[data-notes-previous]');
-    const nextButton = book.querySelector('[data-notes-next]');
-    const currentLabel = book.querySelector('[data-notes-current]');
-    const totalLabel = book.querySelector('[data-notes-total]');
-    const frame = book.querySelector('[data-notes-page-frame]');
-    let currentPage = 0;
+    books.forEach((book) => {
+      const pages = Array.from(book.querySelectorAll('[data-notes-page]'));
+      const previousButton = book.querySelector('[data-notes-previous]');
+      const nextButton = book.querySelector('[data-notes-next]');
+      const currentLabel = book.querySelector('[data-notes-current]');
+      const totalLabel = book.querySelector('[data-notes-total]');
+      const frame = book.querySelector('[data-notes-page-frame]');
+      let currentPage = 0;
 
-    if (!(previousButton instanceof HTMLButtonElement) ||
-        !(nextButton instanceof HTMLButtonElement) ||
-        !(currentLabel instanceof HTMLElement) ||
-        !(totalLabel instanceof HTMLElement) ||
-        !(frame instanceof HTMLElement) ||
-        pages.length === 0) return;
+      if (!(previousButton instanceof HTMLButtonElement) ||
+          !(nextButton instanceof HTMLButtonElement) ||
+          !(currentLabel instanceof HTMLElement) ||
+          !(totalLabel instanceof HTMLElement) ||
+          !(frame instanceof HTMLElement) ||
+          pages.length === 0) return;
 
-    const updateControls = () => {
-      currentLabel.textContent = String(currentPage + 1);
-      totalLabel.textContent = String(pages.length);
-      previousButton.disabled = currentPage === 0;
-      nextButton.disabled = currentPage === pages.length - 1;
-    };
+      book.setAttribute('data-notes-book-ready', 'true');
 
-    const showPage = (nextPage, direction) => {
-      if (nextPage < 0 || nextPage >= pages.length || nextPage === currentPage) return;
+      pages.forEach((page, index) => {
+        if (page instanceof HTMLElement) page.hidden = index !== 0;
+      });
 
-      frame.classList.remove('is-turning-next', 'is-turning-previous');
-      void frame.offsetWidth;
-      frame.classList.add(direction === 'next' ? 'is-turning-next' : 'is-turning-previous');
+      const updateControls = () => {
+        currentLabel.textContent = String(currentPage + 1);
+        totalLabel.textContent = String(pages.length);
+        previousButton.disabled = currentPage === 0;
+        nextButton.disabled = currentPage === pages.length - 1;
+      };
 
-      window.setTimeout(() => {
-        pages[currentPage].hidden = true;
-        pages[nextPage].hidden = false;
-        currentPage = nextPage;
-        updateControls();
-      }, 130);
+      const showPage = (nextPage, direction) => {
+        if (nextPage < 0 || nextPage >= pages.length || nextPage === currentPage) return;
 
-      window.setTimeout(() => {
         frame.classList.remove('is-turning-next', 'is-turning-previous');
-      }, 300);
-    };
+        void frame.offsetWidth;
+        frame.classList.add(direction === 'next' ? 'is-turning-next' : 'is-turning-previous');
 
-    previousButton.addEventListener('click', () => showPage(currentPage - 1, 'previous'));
-    nextButton.addEventListener('click', () => showPage(currentPage + 1, 'next'));
-    updateControls();
-  });
+        window.setTimeout(() => {
+          pages[currentPage].hidden = true;
+          pages[nextPage].hidden = false;
+          currentPage = nextPage;
+          updateControls();
+        }, 130);
+
+        window.setTimeout(() => {
+          frame.classList.remove('is-turning-next', 'is-turning-previous');
+        }, 300);
+      };
+
+      previousButton.onclick = () => showPage(currentPage - 1, 'previous');
+      nextButton.onclick = () => showPage(currentPage + 1, 'next');
+      updateControls();
+    });
+  }
+
+  initNotesBooks();
+  document.addEventListener('astro:page-load', initNotesBooks);
 </script>
